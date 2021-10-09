@@ -1,0 +1,23 @@
+{
+  "name": "mharj-monorepo-shared",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mharj/react-express-typescript-monorepo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mharj/react-express-typescript-monorepo/issues"
+  },
+  "homepage": "https://github.com/mharj/react-express-typescript-monorepo#readme",
+  "devDependencies": {},
+  "description": ""
+}
