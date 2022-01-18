@@ -1,5 +1,4 @@
-import * as bodyParser from 'body-parser';
-import {Express} from 'express';
+import {Express, urlencoded, json} from 'express';
 import {HttpError} from './lib/HttpError';
 import {errorMiddleWare} from './middlewares/errorMiddleware';
 import {routes} from './routes';
@@ -9,8 +8,8 @@ export const setupExpress = (app: Express) => {
 	app.set('etag', false);
 	app.disable('x-powered-by');
 	// body parsers
-	app.use(bodyParser.urlencoded({extended: false}));
-	app.use(bodyParser.json());
+	app.use(urlencoded({extended: false}));
+	app.use(json());
 	// apply middlewares here
 	// app.use(corsMiddleware);
 	// routes

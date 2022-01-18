@@ -1,4 +1,4 @@
-import React, {Component, ComponentClass, createContext, FunctionComponent, ReactNode, StatelessComponent} from 'react';
+import React, {Component, ComponentClass, createContext, FunctionComponent, ReactNode, StatelessComponent, useContext} from 'react';
 
 export interface IWithNotification {
 	notificationStatus: string | undefined;
@@ -19,7 +19,7 @@ const requestNotification = async (): Promise<void> => {
 			return Promise.resolve();
 		}
 	}
-	return Promise.reject();
+	return Promise.reject(new Error('not granted'));
 };
 
 const initialContext: IWithNotification = {
@@ -28,6 +28,10 @@ const initialContext: IWithNotification = {
 };
 
 const NotificationContext = createContext<IWithNotification>(initialContext);
+
+export const useNotification: () => IWithNotification = () => {
+	return useContext(NotificationContext);
+};
 
 export const NotificationConsumer = NotificationContext.Consumer;
 const Provider = NotificationContext.Provider;
@@ -46,13 +50,15 @@ export class NotificationProvider extends Component<IProps, IWithNotification> {
 		this.state = initialContext;
 		this.handleRequestNotification = this.handleRequestNotification.bind(this);
 	}
-	public render() {
+
+	public render(): JSX.Element {
 		const contextValue: IWithNotification = {
 			notificationStatus: this.state.notificationStatus,
 			requestNotification: this.handleRequestNotification,
 		};
 		return <Provider value={contextValue}>{this.props.children}</Provider>;
 	}
+
 	private async handleRequestNotification() {
 		try {
 			await requestNotification();

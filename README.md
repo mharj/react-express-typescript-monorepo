@@ -4,6 +4,10 @@ This is work in progress and commands require NPM >= 7
 
 ## install
 ```powershell
+npm i -workspaces
+
+or 
+
 npm i -w mharj-monorepo-shared
 npm i -w backend
 npm i -w frontend
